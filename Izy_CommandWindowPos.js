@@ -7,7 +7,7 @@
 
 /*:
  * @target MZ
- * @plugindesc This plugin was requested by Accendor. This plugin reposition the combat party and command window in battle.
+ * @plugindesc V1.01 This plugin was requested by Accendor. This plugin reposition the combat party and command window in battle.
  * @author Izyees Fariz
  * @url https://forums.rpgmakerweb.com/
  *
@@ -20,6 +20,9 @@
  * 
  * This plugin does not provide plugin commands.
  *
+ * Change Log:
+ *   V1.01 - Add an option to change the row.
+ *
  * @param WinX
  * @text Window X coordinate
  * @desc Set the X coordinate of the battle window. The default value was set to 0. Use text for negative values.
@@ -31,6 +34,12 @@
  * @text Window Y coordinate
  * @desc Set the Y coordinate of the battle window.  The default value was set to 0. Use text for negative values.
  * @default 0
+ * @type number
+ *
+ * @param WinRow
+ * @text Window Rows
+ * @desc Set the total row of the battle window. The default value was set to 4. Negative values are not supported.
+ * @default 4
  * @type number
  */
  
@@ -45,7 +54,7 @@
 	//The party command window
 	Scene_Battle.prototype.partyCommandWindowRect = function() {
 		const ww = 192;
-		const wh = this.windowAreaHeight();
+		const wh = this.calcWindowHeight(Params.WinRow, true);
 		const wx = Params.WinX;
 		const wy = Params.WinY;
 		return new Rectangle(wx, wy, ww, wh);
@@ -54,7 +63,7 @@
 	//The actor command window
 	Scene_Battle.prototype.actorCommandWindowRect = function() {
 		const ww = 192;
-		const wh = this.windowAreaHeight();
+		const wh = this.calcWindowHeight(Params.WinRow, true);
 		const wx = Params.WinX;
 		const wy = Params.WinY;
 		return new Rectangle(wx, wy, ww, wh);
